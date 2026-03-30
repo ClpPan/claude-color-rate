@@ -43,7 +43,7 @@ Two lines to keep width narrow (useful for Obsidian and narrow terminals).
 ```bash
 mkdir -p ~/.claude/scripts
 curl -o ~/.claude/scripts/status-line.sh \
-  https://raw.githubusercontent.com/wumun5904/claude-color-rate/main/status-line.sh
+  https://raw.githubusercontent.com/ClpPan/claude-color-rate/main/status-line.sh
 chmod +x ~/.claude/scripts/status-line.sh
 ```
 
