@@ -143,6 +143,26 @@ else
     fi
 fi
 
+# --- History logging ---
+_log_file="${HOME}/.claude/usage-history.log"
+_log_dir=$(dirname "$_log_file")
+
+if [ ! -d "$_log_dir" ]; then
+    mkdir -p "$_log_dir" 2>/dev/null || true
+fi
+
+if [ -d "$_log_dir" ] && [ -w "$_log_dir" ]; then
+    _ts=$(date +"%Y-%m-%dT%H:%M:%S%z")
+    _ctx_pct="${pct:---}"
+    _ctx_usage="${used_k:---}k/${max_k:---}k"
+    _rate="${rate_pct_int:---}"
+    _week="${week_pct_int:---}"
+
+    printf '%s\t%s\t%s\t%s\t%s\t%s\n' \
+        "$_ts" "$model" "$_ctx_pct" "$_ctx_usage" "$_rate" "$_week" \
+        >> "$_log_file" 2>/dev/null || true
+fi
+
 # --- Output ---
 printf '%b\n' "${model} | ${context_info}"
 printf '%b\n' "${rate_info} | ${week_info}"
